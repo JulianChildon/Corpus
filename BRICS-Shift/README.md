@@ -177,6 +177,11 @@ python -m pip install -e ".[dev]"
 streamlit run app.py
 ```
 
+The sidebar includes an **Interface language / 界面语言** selector. Choose
+**English** or **简体中文** at any time. This changes only the Streamlit display;
+stored document data, canonical annotation-label values, and exported research
+files are not translated or rewritten.
+
 On the **Import** page:
 
 1. Enter a stable pair ID such as `2025_rio`, year, and declaration title.

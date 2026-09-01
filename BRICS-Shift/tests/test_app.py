@@ -1,7 +1,11 @@
 """Small tests for state-independent Streamlit UI helpers."""
 
 from app import (
+    LANGUAGE_EN,
+    LANGUAGE_OPTIONS,
+    LANGUAGE_ZH,
     SELECT_PROMPT,
+    UI_TEXT,
     _annotation_id,
     _missing_annotation_fields,
     _next_unannotated_id,
@@ -35,12 +39,20 @@ def test_annotation_form_starts_unselected_and_blocks_implicit_labels() -> None:
     assert _missing_annotation_fields(
         SELECT_PROMPT, SELECT_PROMPT, SELECT_PROMPT, ""
     ) == [
-        "Modality Shift",
-        "Stance Shift",
-        "Annotator Confidence",
-        "Guideline version",
+        "modality_shift",
+        "stance_shift",
+        "annotator_confidence",
+        "guideline_version",
     ]
 
 
 def test_na_and_uncertain_are_deliberate_valid_ui_selections() -> None:
     assert _missing_annotation_fields("N/A", "uncertain", "low", "guidelines-v0.1") == []
+
+
+def test_interface_language_catalog_includes_english_and_simplified_chinese() -> None:
+    assert LANGUAGE_OPTIONS == ("简体中文", "English")
+    assert UI_TEXT[LANGUAGE_EN]["page.annotation"] == "Annotation"
+    assert UI_TEXT[LANGUAGE_ZH]["page.annotation"] == "人工标注"
+    assert UI_TEXT[LANGUAGE_EN]["label.preserved"] == "preserved"
+    assert UI_TEXT[LANGUAGE_ZH]["label.preserved"] == "保持"
